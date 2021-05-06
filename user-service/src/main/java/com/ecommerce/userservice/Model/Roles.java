@@ -1,5 +1,7 @@
 package com.ecommerce.userservice.Model;
 
+import java.util.Collection;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,6 +19,15 @@ public class Roles {
 	
 	@Column(name="rolename")
 	private String rolename;
+
+	public Roles(String rolename) {
+		super();
+		this.rolename = rolename;
+	}
+	
+	public Roles() {
+			
+		}
 
 	public int getId() {
 		return id;

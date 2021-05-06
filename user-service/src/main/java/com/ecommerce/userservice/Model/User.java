@@ -2,11 +2,16 @@ package com.ecommerce.userservice.Model;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -28,11 +33,22 @@ public class User {
 	@Column(name="password")
 	private String password;
 	
+	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@JoinTable(
+			name="users_roles",
+			joinColumns = @JoinColumn(
+					              name="user_id",referencedColumnName = "id"),
+			inverseJoinColumns = @JoinColumn(
+					              name="role_id",referencedColumnName = "id"))
+	
 	private Collection<Roles> roles;
 	
-	public User(int id, String username, String email, String password, Collection<Roles> roles) {
+	public User() {
+		
+	}
+
+	public User(String username, String email, String password, Collection<Roles> roles) {
 		super();
-		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.password = password;
