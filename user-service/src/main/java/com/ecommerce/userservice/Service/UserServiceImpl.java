@@ -32,8 +32,11 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Override
-	public User save(UserRegistrationDto registrationDto)
+	public User save(UserRegistrationDto registrationDto) throws Exception
 	{
+		if(userRepository.existsByEmail(registrationDto.getEmail())){
+		   throw new Exception("User is already existing!!");
+		}
 		User user =new User(registrationDto.getUsername(),registrationDto.getEmail(),passwordEncoder.encode(registrationDto.getPassword()), 
 				Arrays.asList(new Roles("ROLE_USER")));
 		

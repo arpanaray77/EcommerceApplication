@@ -1,6 +1,5 @@
 package com.ecommerce.userservice.Model;
 
-import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
