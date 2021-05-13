@@ -1,6 +1,5 @@
 package com.ecommerce.userservice.Model;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -44,5 +43,3 @@ public class Roles {
 		this.rolename = rolename;
 	}
 }
-	
-	
