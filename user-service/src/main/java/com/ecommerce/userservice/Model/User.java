@@ -14,9 +14,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Email;
 
 @Entity
-@Table(name="user",uniqueConstraints =  @UniqueConstraint(columnNames="email"))
+@Table(name="user")
 public class User {
 	
 	@Id
@@ -27,7 +28,8 @@ public class User {
 	@Column(name="username")
 	private String username;
 	
-	@Column(name="email")
+	@Column(name="email",unique = true)
+	@Email
 	private String email;
 	
 	@Column(name="password")
