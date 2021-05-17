@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+ <!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Admin Page</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+<body>
+	<!-- create navigation bar ( header) -->
+	<nav class="navbar navbar-light navbar-expand-lg" style="background-color: #e3f2fd;">
+<!-- Image and text -->
+  <a class="navbar-brand" href="#">
+    <img th:src="@{/img/logo.png}" width="80" height="40" class="d-inline-block align-top" alt="">
+    Bootstrap
+  </a>
+    <form class="form-inline my-2 my-lg-0" style="right:0;">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
+    </form>
+</nav>
+	<br>
+	<br>
+	
+<div class = "container">
+		<div class = "row">
+			<div class = "col-md-6 col-md-offset-3">
+
+				<h4> Add Category Page</h4>
+				<form th:action="@{/categoriesAdd}" method="post">
+
+					<!-- error message -->
+					<div th:if="${param.error}">
+						<div class="alert alert-danger">Invalid email or
+							password.</div>
+					</div>
+
+					<!-- logout message -->
+					<div th:if="${param.logout}">
+						<div class="alert alert-info">You have been logged out.</div>
+					</div>
+
+					<div class = "form-group">
+						<label for ="CategoryID"> Category ID</label> :
+						<input type="text" class = "form-control" id ="CategoryID" name = "CategoryID"
+						placeholder="Enter Category id" autofocus="autofocus">
+					</div>
+
+					<div class="form-group">
+						<label for="categoryName">Category Name</label>: <input type="text"
+							id="categoryName" name="categoryName" class="form-control"
+							placeholder="Enter category name" />
+					</div>
+
+					<div class="form-group">
+						<div class="row">
+							<div class="col-sm-6 col-sm-offset-3">
+								<input type="submit" name="login-submit" id="login-submit"
+									class="form-control btn btn-primary" value="Add Category" />
+							</div>
+						</div>
+					</div>
+				</form>
+				<div class="form-group">
+						<span><a th:href="@{/categories}">Go back to categories?</a></span>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html> 
