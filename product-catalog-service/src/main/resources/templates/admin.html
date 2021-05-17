@@ -29,8 +29,8 @@
           Dropdown
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Product</a>
-          <a class="dropdown-item" href="#">Categories</a>
+          <a class="dropdown-item" th:href="@{/admin/products}">Product</a>
+          <a class="dropdown-item" th:href="@{/admin/categories}">Categories</a>
         </div>
       </li>
     </ul>
@@ -40,11 +40,6 @@
 </nav>
 	<br>
 	<br>
-
-	<div class="container">
-		<h1></h1>
-		
-	</div>
 	
 <div class="jumbotron">
   <h2 class="display-4">Ecomm</h2>
@@ -52,8 +47,8 @@
   <hr class="my-4">
   <p>Welcome <span sec:authentication="principal.username"> Admin</span></p>
   <p class="lead">
-    <a class="btn btn-primary btn-lg" href="#" role="button">Manage Categories</a>
-     <a class="btn btn-primary btn-lg" href="#" role="button">Manage Products</a>
+    <a class="btn btn-primary btn-lg" th:href="@{/admin/categories}" role="button">Manage Categories</a>
+     <a class="btn btn-primary btn-lg" th:href="@{/admin/products}" role="button">Manage Products</a>
   </p>
 </div>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

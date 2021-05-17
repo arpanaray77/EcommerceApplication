@@ -11,9 +11,14 @@ public class AdminProductController {
 		return "admin";
 	}
 
-	@GetMapping("/admin/homepage")
-	public String home() {
-		return "homepg";
+	@GetMapping("/admin/categories")
+	public String categoriesList() {
+		return "categories";
+	}
+	
+	@GetMapping("/admin/categories/add")
+	public String addCategories() {
+		return "categoriesAdd";
 	}
 
 }
