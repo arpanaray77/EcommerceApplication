@@ -26,17 +26,31 @@
 	<div class="categoriesTable">
 	
 	<p>
-    <a class="btn btn-primary btn-lg" th:href="@{/admin/categories/add}" style="margin:20px 0;" role="button">Add Category</a>
+    <a class="btn btn-primary btn" th:href="@{/admin/categories/add}" style="margin:20px 0;" role="button">Add Category</a>
   </p>
 	<table class="table">
 	<thead class="thead-light">
       <tr>
-        <th>Category ID</th>
-        <th>Categrory Name</th>
-        <th>Delete</th>
-        <th>Update</th>
+        <th scope="col">Category ID</th>
+        <th scope="col" >Category Name</th>
+        <th scope="col" >Category Type</th>
+        <th scope="col" >Category Section</th>
+        <th scope="col">Delete</th>
+        <th scope="col">Update</th>
       </tr>
       </thead>
+      
+      <tbody>
+	      <tr th:each="category, iStat:${categories}">
+	      	<th scope="row" th:text="${iStat.index + 1}">1</th>
+	      	<td th:text="${category.categoryName}">Larry</td>
+	      	<td th:text="${category.categoryType}">Larry</td>
+	      	<td th:text="${category.categorySection}">Larry</td>
+	      	
+	      	<td><a href="" th:href="@{/admin/categories/delete/{id}(id=${category.categoryId})}" class="btn btn-danger btn">Delete</a></td>
+	      	<td><a href="" th:href="@{/admin/categories/update/{id}(id=${category.categoryId})}" class="btn btn-warning btn">Update</a></td>
+	      </tr>
+      </tbody>
     </table>
 	</div>
 

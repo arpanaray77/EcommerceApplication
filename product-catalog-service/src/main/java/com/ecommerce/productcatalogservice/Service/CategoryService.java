@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 
 import com.ecommerce.productcatalogservice.Model.Category;
 import com.ecommerce.productcatalogservice.Repository.CategoryRepository;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +14,21 @@ public class CategoryService {
 	@Autowired
 	CategoryRepository categoryRepository;
 	
-	public Category addCategory(Category category)
+	public void addCategory(Category category)
 	{
-		return categoryRepository.save(category);
+	  categoryRepository.save(category);
 	}
 	
+	public void deleteCategoryById(int id)
+	{
+	  categoryRepository.deleteById(id);
+	}
+	
+	public java.util.Optional<Category> updateCategoryById(int id)
+	{
+	  return categoryRepository.findById(id);
+	}
+		
 	public List<Category> getAllCategory()
 	{
 		return categoryRepository.findAll();

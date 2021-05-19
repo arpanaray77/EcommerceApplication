@@ -17,9 +17,10 @@
     <img th:src="@{/img/logo.png}" width="80" height="40" class="d-inline-block align-top" alt="">
     Bootstrap
   </a>
-    <form class="form-inline my-2 my-lg-0" style="right:0;">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
-    </form>
+  <br>
+    <div style="float:right">
+      <button class="btn btn-outline-success" type="submit">Logout</button>
+    </div>
 </nav>
 	<br>
 	<br>
@@ -29,42 +30,51 @@
 			<div class = "col-md-6 col-md-offset-3">
 
 				<h4> Add Category Page</h4>
-				<form th:action="@{/categoriesAdd}" method="post">
-
-					<!-- error message -->
-					<div th:if="${param.error}">
-						<div class="alert alert-danger">Invalid email or
-							password.</div>
-					</div>
-
-					<!-- logout message -->
-					<div th:if="${param.logout}">
-						<div class="alert alert-info">You have been logged out.</div>
-					</div>
+				<form th:action="@{/admin/categories/add}" method="post" th:object="${category}">
 
 					<div class = "form-group">
-						<label for ="CategoryID"> Category ID</label> :
-						<input type="text" class = "form-control" id ="CategoryID" name = "CategoryID"
-						placeholder="Enter Category id" autofocus="autofocus">
+						<input type="hidden" id ="categoryId" name = "categoryId" class = "form-control" 
+						placeholder="Enter Category id" th:field="*{categoryId}" />
 					</div>
 
 					<div class="form-group">
 						<label for="categoryName">Category Name</label>: <input type="text"
 							id="categoryName" name="categoryName" class="form-control"
-							placeholder="Enter category name" />
+							placeholder="Enter category name" th:field="*{categoryName}" required />
 					</div>
+					
+					<div class="form-group">
+						<label for="categoryType">Category Type</label>: <input type="text"
+							id="categoryType" name="categoryType" class="form-control"
+							placeholder="Enter category type" th:field="*{categoryType}" required />
+					</div>
+					
+					
+				<div>
+				    <label for="categorySection">Category Section</label>:
+					<div>
+				         <select class="form-control" id="categorySection" name="categorySection" th:field="*{categorySection}">
+						    <option value="0">select section</option>
+						    <option th:value="Male" th:text="Male">Male</option>
+						    <option  th:value="Female" th:text="Female">Female</option>
+						    <option  th:value="Both" th:text="Both">Both</option>
+                        </select>
+				     </div>
+				  </div>
+				  <br>
+				  <br>
 
 					<div class="form-group">
 						<div class="row">
 							<div class="col-sm-6 col-sm-offset-3">
-								<input type="submit" name="login-submit" id="login-submit"
+								<input type="submit" name="category-submit" id="category-submit"
 									class="form-control btn btn-primary" value="Add Category" />
 							</div>
 						</div>
 					</div>
 				</form>
 				<div class="form-group">
-						<span><a th:href="@{/categories}">Go back to categories?</a></span>
+						<span><a th:href="@{/admin/categories}">Go back to categories?</a></span>
 				</div>
 			</div>
 		</div>
