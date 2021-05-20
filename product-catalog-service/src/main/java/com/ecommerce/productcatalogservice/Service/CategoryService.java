@@ -24,7 +24,7 @@ public class CategoryService {
 	  categoryRepository.deleteById(id);
 	}
 	
-	public java.util.Optional<Category> updateCategoryById(int id)
+	public java.util.Optional<Category> getCategoryById(int id)
 	{
 	  return categoryRepository.findById(id);
 	}

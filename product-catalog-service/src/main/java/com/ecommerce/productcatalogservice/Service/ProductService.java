@@ -7,8 +7,7 @@ public interface ProductService {
 	
 	public List<Product> getAllProduct();
 	public List<Product> getAllProductByCategory(String category);
-	public Product getProductById(Long id);
-	public List<Product> getAllProductByName(String name);
-	public Product addProduct(Product product);
-	public void deleteProduct(Long productId);
+	public java.util.Optional<Product> getProductById(Long id);
+	public void addProduct(Product product);
+    public void deleteProductById(Long productId);
 }

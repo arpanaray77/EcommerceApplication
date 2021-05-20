@@ -1,44 +1,44 @@
 package com.ecommerce.productcatalogservice.Model;
 
 import java.math.BigDecimal;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import com.sun.istack.NotNull;
 
+import lombok.Data;
+
 @Entity
-@Table(name="products")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Data
 public class Product {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue (strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column (name = "product_name")
     @NotNull
     private String productName;
-
-    @Column (name = "price")
+    
     @NotNull
     private BigDecimal price;
-
-    @Column (name = "description")
-    private String description;
-
-    @Column (name = "category")
+    
     @NotNull
-    private String category;
+    private String description;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="categoryId",referencedColumnName = "categoryId")
+    @NotNull
+    private Category category;
 
-    @Column (name = "availability")
     @NotNull
     private int availability;
+    
+    @NotNull
+    private String imgName;
 
 	public Product() {
 
@@ -72,15 +72,15 @@ public class Product {
 		return description;
 	}
 
-	public void setDiscription(String description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	public String getCategory() {
+	public Category getCategory() {
 		return category;
 	}
 
-	public void setCategory(String category) {
+	public void setCategory(Category category) {
 		this.category = category;
 	}
 
@@ -90,5 +90,14 @@ public class Product {
 
 	public void setAvailability(int availability) {
 		this.availability = availability;
-	} 
+	}
+
+	public String getImgName() {
+		return imgName;
+	}
+
+	public void setImgName(String imgName) {
+		this.imgName = imgName;
+	}
+	
 }

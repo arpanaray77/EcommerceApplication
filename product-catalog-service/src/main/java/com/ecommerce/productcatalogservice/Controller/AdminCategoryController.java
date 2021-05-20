@@ -12,7 +12,7 @@ import com.ecommerce.productcatalogservice.Service.CategoryService;
 import com.sun.el.stream.Optional;
 
 @Controller
-public class AdminProductController {
+public class AdminCategoryController {
 	
 	@Autowired
 	private CategoryService categoryService;
@@ -49,7 +49,7 @@ public class AdminProductController {
 	
 	@GetMapping("/admin/categories/update/{id}")
 	public String updateCategory(@PathVariable int id,Model model){
-		java.util.Optional<Category> category = categoryService.updateCategoryById(id);
+		java.util.Optional<Category> category = categoryService.getCategoryById(id);
 		if(category.isPresent())
 		{
 			model.addAttribute("category",category.get());
