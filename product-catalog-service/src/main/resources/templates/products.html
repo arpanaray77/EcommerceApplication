@@ -55,7 +55,7 @@
             <th scope="row" th:text="${iStat.index + 1}">1</th>
             <td th:text="${product.productName}">Larry</td>
             <td th:text="${product.category.categoryName}">Larry</td>
-            <td><img src="" height="100px" width="100px"  th:src="@{${'/img/' + product.imgName}}"></td>
+            <td><img src="../static/productImages/product.imgName" height="100px" width="100px" th:src="@{${'/productImages/' + product.imgName}}"></td>
 
             <td><a href="" th:href="@{/admin/product/delete/{id}(id=${product.id})}" class="btn btn-danger">Delete</a></td>
             <td><a href="" th:href="@{/admin/product/update/{id}(id=${product.id})}" class="btn btn-warning">Update</a></td>

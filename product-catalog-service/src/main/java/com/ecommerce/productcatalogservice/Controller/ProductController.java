@@ -27,7 +27,7 @@ public class ProductController {
 	public ProductService productService;
 	@Autowired
 	private CategoryService categoryService;
-	static String uploadDir=System.getProperty("user.dir")+"/src/main/resources/static/img";
+	static String uploadDir=System.getProperty("user.dir")+"/src/main/resources/static/productImages";
 	
 	@GetMapping(value = "/admin/products")
 	 public String getAllProducts(Model model){
@@ -58,6 +58,7 @@ public class ProductController {
 		{
 			imageUUID=file.getOriginalFilename();
 			Path fileName =Paths.get(uploadDir,imageUUID);
+			//System.out.println(fileName);
 			Files.write(fileName, file.getBytes());
 		}else
 		{
@@ -68,24 +69,5 @@ public class ProductController {
 		
 		return "redirect:/admin/products";
 	}
-	
-	
-//	@GetMapping(value = "/products", params = "category")
-//    public List<Product> getAllProductByCategory(@RequestParam ("category") String category){
-//        List<Product> products = productService.getAllProductByCategory(category);
-//        return products;
-//    }
-//
-//    @GetMapping (value = "/products/{id}")
-//    public Product getOneProductById(@PathVariable ("id") long id){
-//        Product product =  productService.getProductById(id);
-//       return product;
-//    }
-//
-//    @GetMapping (value = "/products", params = "name")
-//    public List<Product> getAllProductsByName(@RequestParam ("name") String name){
-//        List<Product> products =  productService.getAllProductByName(name);
-//       return products;
-//    }
 
 }
