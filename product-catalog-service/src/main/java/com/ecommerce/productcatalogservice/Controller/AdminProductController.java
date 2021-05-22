@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,7 +22,7 @@ import com.ecommerce.productcatalogservice.Service.CategoryService;
 import com.ecommerce.productcatalogservice.Service.ProductService;
 
 @Controller
-public class ProductController {
+public class AdminProductController {
 	
 	@Autowired
 	public ProductService productService;
@@ -69,5 +70,31 @@ public class ProductController {
 		
 		return "redirect:/admin/products";
 	}
+	
+	@GetMapping("/admin/product/delete/{id}")
+	public String deleteProduct(@PathVariable long id)
+	{
+		productService.deleteProductById(id);
+		return "redirect:/admin/products";
+	}
+	
+	@GetMapping("/admin/product/update/{id}")
+	public String updateProduct(@PathVariable long id,Model model){
+		
+		Product product = productService.getProductById(id).get(); //get() is used to get the value or it will return exception
 
+		ProductDTO productDTO = new ProductDTO();
+		productDTO.setId(product.getId());
+		productDTO.setProductName(product.getProductName());
+		productDTO.setCategoryId(product.getCategory().getCategoryId());
+		productDTO.setPrice(product.getPrice());
+		productDTO.setDescription(product.getDescription());
+		productDTO.setAvailability(product.getAvailability());
+		productDTO.setImgName(product.getImgName());
+		
+		model.addAttribute("categories",categoryService.getAllCategory());
+		model.addAttribute("productDTO",productDTO);
+		
+			return "productsAdd";
+	}
 }

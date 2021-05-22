@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.ecommerce.productcatalogservice.Model.Category;
 import com.ecommerce.productcatalogservice.Service.CategoryService;
-import com.sun.el.stream.Optional;
 
 @Controller
 public class AdminCategoryController {
