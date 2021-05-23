@@ -22,11 +22,6 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<Product> getAllProductByCategory(String category) {
-		return productRespository.findAllByCategory(category);
-	}
-
-	@Override
 	public java.util.Optional<Product> getProductById(Long id) {
 	    return productRespository.findById(id);
 	}
@@ -39,6 +34,11 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public void deleteProductById(Long productId) {
 	   productRespository.deleteById(productId);
+	}
+
+	@Override
+	public List<Product> getAllProductByCategoryId(Integer categoryId) {
+		return productRespository.findAllByCategoryId(categoryId);
 	}
 
 }

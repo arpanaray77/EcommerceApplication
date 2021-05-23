@@ -10,5 +10,5 @@ import com.ecommerce.productcatalogservice.Model.Product;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long>{
 	
-	public List<Product> findAllByCategory(String category);
+	public List<Product> findAllByCategoryId(Integer categoryId);
 }

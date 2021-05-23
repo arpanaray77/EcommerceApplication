@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.ecommerce.productcatalogservice.Service.CategoryService;
 import com.ecommerce.productcatalogservice.Service.ProductService;
@@ -23,13 +24,22 @@ public class ProductCatalogController {
     	return "index";
     }
     
-    @GetMapping({"/shop"})
+    @GetMapping("/shop")
     public String shopCategoriesandProducts(Model model)
     {
     	model.addAttribute("categories",categoryService.getAllCategory());
     	model.addAttribute("products",productService.getAllProduct());
-    	return "index";
+    	return "shop";
     
     }
+
+    @GetMapping("/shop/category/{categoryId}")
+    public String shopByCategory(Model model,@PathVariable Integer categoryId)
+    {
+    	model.addAttribute("categories",categoryService.getAllCategory());
+    	model.addAttribute("products",productService.getAllProductByCategoryId(categoryId));
+    	return "shop";
+    
+    }  
 
 }
