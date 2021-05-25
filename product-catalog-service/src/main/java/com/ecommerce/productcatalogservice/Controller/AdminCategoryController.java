@@ -13,9 +13,9 @@ import com.ecommerce.productcatalogservice.Service.CategoryService;
 @Controller
 public class AdminCategoryController {
 	
-	@Autowired
-	private CategoryService categoryService;
-
+   @Autowired
+   private CategoryService categoryService;
+   
 	@GetMapping("/admin")
 	public String adminHome() {
 		return "admin";

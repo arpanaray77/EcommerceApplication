@@ -6,39 +6,40 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.ecommerce.productcatalogservice.Model.Product;
 import com.ecommerce.productcatalogservice.Repository.ProductRepository;
 
 @Service
 @Transactional
 public class ProductServiceImpl implements ProductService {
-
+    
 	@Autowired
-	public ProductRepository productRespository;
+	public ProductRepository productRepository;
 	
+	@Override
 	public List<Product> getAllProduct() {
-		return productRespository.findAll();
+		return productRepository.findAll();
 	}
 
+
 	@Override
-	public java.util.Optional<Product> getProductById(Long id) {
-	    return productRespository.findById(id);
+	public Product getProductById(Long id) {
+		return productRepository.getOne(id);
 	}
 
 	@Override
 	public void addProduct(Product product) {
-	   productRespository.save(product);
+	    productRepository.save(product);
 	}
 
 	@Override
 	public void deleteProductById(Long productId) {
-	   productRespository.deleteById(productId);
+	    productRepository.deleteById(productId);
 	}
 
 	@Override
-	public List<Product> getAllProductByCategoryId(Integer categoryId) {
-		return productRespository.findAllByCategoryId(categoryId);
+	public List<Product> getAllProductByCategory_id(Integer categoryId) {
+		return productRepository.findAllProductsByCategoryCategoryId(categoryId);
 	}
 
 }

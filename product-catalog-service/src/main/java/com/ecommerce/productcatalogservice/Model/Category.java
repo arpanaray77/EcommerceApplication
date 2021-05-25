@@ -8,7 +8,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Category {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="categoryId")
@@ -54,5 +54,4 @@ public class Category {
 	public void setCategorySection(String categorySection) {
 		this.categorySection = categorySection;
 	}
-
 }
