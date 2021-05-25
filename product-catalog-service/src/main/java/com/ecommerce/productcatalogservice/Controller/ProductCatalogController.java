@@ -13,10 +13,10 @@ import com.ecommerce.productcatalogservice.Service.ProductService;
 public class ProductCatalogController {
 	
 	@Autowired
-	public CategoryService categoryService;
+	private CategoryService categoryService;
 	
 	@Autowired
-	public ProductService productService;
+	private ProductService productService;
 	
     @GetMapping({"/", "/home"})
     public String displayProducts(Model model)
@@ -37,9 +37,15 @@ public class ProductCatalogController {
     public String shopByCategory(Model model,@PathVariable Integer categoryId)
     {
     	model.addAttribute("categories",categoryService.getAllCategory());
-    	model.addAttribute("products",productService.getAllProductByCategoryId(categoryId));
+    	model.addAttribute("products",productService.getAllProductByCategory_id(categoryId));
     	return "shop";
+    }  
     
+    @GetMapping("/shop/viewproduct/{id}")
+    public String viewProduct(Model model,@PathVariable Long id)
+    {
+    	model.addAttribute("product",productService.getProductById(id));
+    	return "viewProduct";
     }  
 
 }
