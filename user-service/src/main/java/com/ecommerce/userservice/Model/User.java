@@ -14,24 +14,28 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name="user")
 public class User {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="ID")
 	private int id;
 	
-	@Column(name="username")
+	@Column(name="username",nullable=false)
+	@NotEmpty
 	private String username;
 	
-	@Column(name="email",unique = true)
-	@Email
+	@Column(name="email",nullable=false,unique = true)
+	@NotEmpty
+	@Email(message = "{errors.invalid_email}")
 	private String email;
 	
-	@Column(name="password")
+	@Column(name="password",nullable=false)
+	@NotEmpty
 	private String password;
 	
 	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
@@ -55,6 +59,14 @@ public class User {
 		this.password = password;
 		this.roles = roles;
 	}
+	
+//	parameterized constructor with entity object
+//	public User(User user) {
+//		this.username = user.getUsername();
+//		this.email = user.getEmail();
+//		this.password =user.getPassword();
+//		this.roles = user.getRoles();
+//	}
 	
 	public int getId() {
 		return id;

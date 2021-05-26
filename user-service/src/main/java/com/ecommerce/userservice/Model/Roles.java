@@ -6,16 +6,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name="roles")
 public class Roles {
 	
+	//if we donot use name in column and table annotation then by default it will use names of model class
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	@Column(name="rolename")
+	@Column(name="rolename",nullable = false,unique = true) 
+	@NotEmpty
 	private String rolename;
 
 	public Roles(String rolename) {
