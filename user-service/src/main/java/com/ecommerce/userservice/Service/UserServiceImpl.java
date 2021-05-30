@@ -15,26 +15,26 @@ import org.springframework.stereotype.Service;
 import com.ecommerce.userservice.Controller.DTO.UserRegistrationDto;
 import com.ecommerce.userservice.Model.Roles;
 import com.ecommerce.userservice.Model.User;
+import com.ecommerce.userservice.Repository.RoleRepository;
 import com.ecommerce.userservice.Repository.UserRepository;
 
 
 @Service
 public class UserServiceImpl implements UserService{
 
-	private UserRepository userRepository;
-	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	
-	public UserServiceImpl(UserRepository userRepository) {
-		super();
-		this.userRepository = userRepository;
-	}
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Autowired
+	private RoleRepository roleRepository;
 
 	@Override
 	public User save(UserRegistrationDto registrationDto) {
 		User user = new User(registrationDto.getUsername(), registrationDto.getEmail(),
-				passwordEncoder.encode(registrationDto.getPassword()), Arrays.asList(new Roles("ROLE_USER")));
+				passwordEncoder.encode(registrationDto.getPassword()), Arrays.asList(roleRepository.findById(2).get()));
 		
 		return userRepository.save(user);
 	}
@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 	
-		User user = userRepository.findByEmail(username);
+		User user = userRepository.findUserByEmail(username);
 		if(user == null) {
 			throw new UsernameNotFoundException("Invalid username or password.");
 		}

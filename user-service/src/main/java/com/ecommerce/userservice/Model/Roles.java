@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name="roles")
+@Table(name="role")
 public class Roles {
 	
 	//if we donot use name in column and table annotation then by default it will use names of model class
@@ -18,7 +18,7 @@ public class Roles {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	@Column(name="rolename",nullable = false,unique = true) 
+	@Column(name="rolename",nullable = false,unique=true) 
 	@NotEmpty
 	private String rolename;
 

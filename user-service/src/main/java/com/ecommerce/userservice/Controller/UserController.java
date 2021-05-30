@@ -1,5 +1,6 @@
 package com.ecommerce.userservice.Controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,12 +14,8 @@ import com.ecommerce.userservice.Service.UserService;
 @RequestMapping("/registration")
 public class UserController {
 	
+	@Autowired
 	private UserService userService;
-
-	public UserController(UserService userService) {
-		super();
-		this.userService = userService;
-	}
 	
 	@ModelAttribute("user")
     public UserRegistrationDto userRegistrationDto() {
