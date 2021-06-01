@@ -30,6 +30,7 @@ public class GoogleOAuth2SuccessHandler implements AuthenticationSuccessHandler 
 	@Autowired
 	private UserRepository userRepository;
 	
+	
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy(); 
 
 	@Override
@@ -44,8 +45,9 @@ public class GoogleOAuth2SuccessHandler implements AuthenticationSuccessHandler 
 		    }
 		    else {
 		    	User user=new User();
-		    	user.setUsername(token.getPrincipal().getAttributes().get("username").toString());
+		    	user.setUsername(token.getPrincipal().getAttributes().get("given_name").toString());
 		    	user.setEmail(email);
+		    	//user.setPassword(email);
 		    	List<Roles> roles=new ArrayList<>();
 		    	roles.add(roleRepository.findById(2).get());
 		    	user.setRoles(roles);

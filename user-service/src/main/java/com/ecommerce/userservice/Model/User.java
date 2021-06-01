@@ -34,11 +34,10 @@ public class User {
 	@Email(message = "{errors.invalid_email}")
 	private String email;
 	
-	@Column(name="password",nullable=false)
-	@NotEmpty
+	@Column(name="password")
 	private String password;
 	
-	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
 	@JoinTable(
 			name="users_roles",
 			joinColumns = @JoinColumn(
