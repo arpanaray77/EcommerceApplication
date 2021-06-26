@@ -1,5 +1,6 @@
 package com.ecommerce.userservice.Controller;
 
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,5 +36,6 @@ public class MainController {
 	    {
 		    ResponseEntity<String> responseView = restTemplate.getForEntity(homepg +"/viewproduct/"+id, String.class);
 	    	return responseView;
-	    }  
-}
+	    } 
+	 
+	 }
