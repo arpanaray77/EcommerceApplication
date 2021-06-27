@@ -1,4 +1,4 @@
-package com.ecommerce.productcatalogservice.global;
+package com.ecommerce.productcatalogservice.Global;
 
 import java.util.ArrayList;
 import java.util.List;

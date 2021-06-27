@@ -10,7 +10,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.ecommerce.productcatalogservice.Service.CategoryService;
 import com.ecommerce.productcatalogservice.Service.ProductService;
-import com.ecommerce.productcatalogservice.global.GlobalData;
+import com.ecommerce.productcatalogservice.Global.GlobalData;
 
 @Controller
 public class ProductCatalogController {
@@ -56,18 +56,18 @@ public class ProductCatalogController {
     	return "viewProduct";
     }  
     
-    @GetMapping("/addToCart/{id}")
-	public ResponseEntity<String> addToCart(@PathVariable Long id) {
-	    ResponseEntity<String> responseCart = restTemplate.getForEntity("http://localhost:8008/addToCart/"+id, String.class);
-    	return responseCart;
-	}
-	
-	@GetMapping("/cart")
-	public ResponseEntity<String> getCart()
-	{
-		ResponseEntity<String> responseCart = restTemplate.getForEntity("http://localhost:8008/cartService", String.class);
-    	return responseCart;
-	}
+//    @GetMapping("/addToCart/{id}")
+//	public ResponseEntity<String> addToCart(@PathVariable Long id) {
+//	    ResponseEntity<String> responseCart = restTemplate.getForEntity("http://localhost:8008/addToCart/"+id, String.class);
+//    	return responseCart;
+//	}
+//	
+//	@GetMapping("/cart")
+//	public ResponseEntity<String> getCart()
+//	{
+//		ResponseEntity<String> responseCart = restTemplate.getForEntity("http://localhost:8008/cartService", String.class);
+//    	return responseCart;
+//	}
 
 
 }
