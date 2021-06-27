@@ -29,7 +29,6 @@ public class CartController {
 	@GetMapping("/addToCart/{id}")
 	public ResponseEntity<String> addToCart(@PathVariable Long id) {
 		GlobalData.cart.add(productService.getProductById(id));
-		System.out.println(GlobalData.cart);
 		return response;
 	}
 	
@@ -37,6 +36,7 @@ public class CartController {
 	public ResponseEntity<String> getResponse() {
 		return response;
 	}
+	
 	
 	@GetMapping("/shop/viewproduct/{id}")
     public ResponseEntity<String> viewProduct(@PathVariable Long id)
@@ -49,8 +49,11 @@ public class CartController {
 	public String getCart(Model model)
 	{
 		model.addAttribute("cartCount",GlobalData.cart.size());
-		model.addAttribute("total",GlobalData.cart.stream().mapToDouble((ToDoubleFunction<? super Product>) product.getPrice()).sum());
-		model.addAttribute("cart",GlobalData.cart.get(0));
+		System.out.println("getCart===="+GlobalData.cart.size());
+//		for(Product p:GlobalData.cart)
+//			System.out.println("jhgkj===="+p.getProductName());
+		//model.addAttribute("total",GlobalData.cart.stream().mapToDouble((ToDoubleFunction<? super Product>) product.getPrice()).sum());
+		model.addAttribute("cart",GlobalData.cart);
 		return "cartService";
 	}
 }

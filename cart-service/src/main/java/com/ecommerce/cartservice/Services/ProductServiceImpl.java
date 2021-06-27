@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.ecommerce.cartservice.Repository.ProductRepository;
 import com.ecommerce.cartservice.model.Product;
@@ -13,6 +14,7 @@ import com.ecommerce.cartservice.model.Product;
 
 @Service
 @Transactional
+@EnableTransactionManagement 
 public class ProductServiceImpl implements ProductService {
     
 	@Autowired
