@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -28,7 +28,7 @@
             <ul class="navbar-nav mr-auto"></ul>
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/shop}" href="#">home</a>
+                    <a class="nav-link" th:href="@{/}" href="#">home</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}" href="#">login</a>
@@ -65,30 +65,29 @@
 
                             <h5 class="mb-4">Cart (<span th:text="${cartCount}">2</span> items)</h5>
 
-                            <div class="row mb-4" th:each="item, iStat : ${cart}">
+                            <div class="row mb-4" th:each="product,iter : ${cart}">
                                 <div class="col-md-5 col-lg-3 col-xl-3">
                                     <div class="mb-3 mb-md-0">
-                                        <img class="img-fluid w-100"
-                                             th:src="@{${'/productImages/' + item.imgName}}" alt="Sample">
+                                        <img class="img-fluid w-100" th:src="@{${'/productImages/' + product.imgName}}"alt="Sample">
                                     </div>
                                 </div>
                                 <div class="col-md-7 col-lg-9 col-xl-9">
                                     <div>
                                         <div class="d-flex justify-content-between">
                                             <div>
-                                                <h5 th:text="${item.productName}">Blue denim shirt</h5>
-                                                <p class="mb-3 text-uppercase small">Description: <span th:text="${item.description}"></span></p>
-                                           <p class="mb-2 text-uppercase small">Category: <span th:text="${item.category.categoryName}"></span></p>
+                                                <h5 th:text="${product.productName}">Blue denim shirt</h5>
+                                                <p class="mb-3 text-uppercase small">Description: <span th:text="${product.description}"></span></p>
+                                           <p class="mb-2 text-uppercase small">Category: <span th:text="${product.category.categoryName}"></span></p>
                                             </div>
 
                                         </div>
                                         <div class="mt-5 d-flex justify-content-between align-items-center">
                                             <div>
-                                                <a href="#!" th:href="@{/cart/removeItem/{id}(id=${iStat.id})}"  type="button" class="card-link-secondary small text-uppercase mr-3"><i
+                                                <a href="#!" th:href="@{/cartService/removeItem/{index}(index=${iter.index})}"  type="button" class="card-link-secondary small text-uppercase mr-3"><i
                                                         class="fas fa-trash-alt mr-1"></i> Remove item </a>
 
                                             </div>
-                                            <p class="mb-0"><span><strong>₹<span th:text="${item.price}"></span></strong></span></p>
+                                            <p class="mb-0"><span><strong>₹<span th:text="${product.price}"></span></strong></span></p>
                                         </div>
                                     </div>
                                 </div>
@@ -129,7 +128,7 @@
                                     <div>
                                         <strong>The total amount of</strong>
                                         <strong>
-                                            <p class="mb-0">(including VAT)</p>
+                                            <p class="mb-0">(including GST)</p>
                                         </strong>
                                     </div>
                                     <span><strong>₹<span th:text="${total}"></span></strong></span>

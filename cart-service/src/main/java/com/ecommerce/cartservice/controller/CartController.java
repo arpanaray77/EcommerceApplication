@@ -1,5 +1,6 @@
 package com.ecommerce.cartservice.controller;
 
+import java.math.BigDecimal;
 import java.util.function.ToDoubleFunction;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,6 @@ public class CartController {
 
 	@Autowired
 	ProductService productService;
-	
-	Product product=new Product();
 	
 	String homepg= "http://localhost:8086/shop";
 	RestTemplate restTemplate = new RestTemplate();
@@ -49,11 +48,15 @@ public class CartController {
 	public String getCart(Model model)
 	{
 		model.addAttribute("cartCount",GlobalData.cart.size());
-		System.out.println("getCart===="+GlobalData.cart.size());
-//		for(Product p:GlobalData.cart)
-//			System.out.println("jhgkj===="+p.getProductName());
-		//model.addAttribute("total",GlobalData.cart.stream().mapToDouble((ToDoubleFunction<? super Product>) product.getPrice()).sum());
+		model.addAttribute("total",GlobalData.cart.stream().map(x->x.getPrice()).reduce(BigDecimal.ZERO, BigDecimal::add));
 		model.addAttribute("cart",GlobalData.cart);
 		return "cartService";
+	}
+	
+	@GetMapping("/cartService/removeItem/{index}")
+	public String removeCartItem(@PathVariable int index)
+	{
+		GlobalData.cart.remove(index);
+		return "redirect:/cartService";
 	}
 }
