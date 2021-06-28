@@ -1,8 +1,6 @@
 package com.ecommerce.cartservice.controller;
 
 import java.math.BigDecimal;
-import java.util.function.ToDoubleFunction;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -13,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.ecommerce.cartservice.Services.ProductService;
 import com.ecommerce.cartservice.global.GlobalData;
-import com.ecommerce.cartservice.model.Product;
+
 
 @Controller
 public class CartController {
@@ -58,5 +56,12 @@ public class CartController {
 	{
 		GlobalData.cart.remove(index);
 		return "redirect:/cartService";
+	}
+	
+	@GetMapping("/checkout")
+	public String goCheckout(Model model)
+	{
+		model.addAttribute("total",GlobalData.cart.stream().map(x->x.getPrice()).reduce(BigDecimal.ZERO, BigDecimal::add));
+		return "checkout";
 	}
 }
