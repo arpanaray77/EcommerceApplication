@@ -3,9 +3,11 @@ package com.ecommerce.userservice.Controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
+
 
 @Controller
 public class MainController {
@@ -37,5 +39,34 @@ public class MainController {
 		    ResponseEntity<String> responseView = restTemplate.getForEntity(homepg +"/viewproduct/"+id, String.class);
 	    	return responseView;
 	    } 
+	 
+	 String cartpg="http://localhost:8008/cartService";
+	 
+	 @GetMapping("/addToCart/{id}")
+		public ResponseEntity<String> addToCart(@PathVariable Long id) {
+		 ResponseEntity<String> responseView = restTemplate.getForEntity("http://localhost:8008/addToCart/"+id, String.class);
+	    	return responseView;
+		}
+	 
+	 @GetMapping("/cartService")
+		public ResponseEntity<String> getCart(Model model)
+		{
+			ResponseEntity<String> responseView = restTemplate.getForEntity(cartpg, String.class);
+	    	return responseView;
+		}
+		
+		@GetMapping("/cartService/removeItem/{index}")
+		public ResponseEntity<String> removeCartItem(@PathVariable int index)
+		{
+			ResponseEntity<String> responseView = restTemplate.getForEntity(cartpg+"/removeItem/"+index, String.class);
+	    	return responseView;
+		}
+		
+		@GetMapping("/checkout")
+		public ResponseEntity<String> goCheckout(Model model)
+		{
+			ResponseEntity<String> responseView = restTemplate.getForEntity(cartpg+"/checkout/", String.class);
+	    	return responseView;
+		}
 	 
 	 }
