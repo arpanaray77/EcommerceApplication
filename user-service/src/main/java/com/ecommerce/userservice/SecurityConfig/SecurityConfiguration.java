@@ -50,20 +50,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	 protected void configure(HttpSecurity http) throws Exception
 	 {
 	     http
+	     .csrf().disable()
 	     .authorizeRequests()
 	     .antMatchers(
 	    		 "/",
 	    		 "/shop/**",
 	    		 "/registration**").permitAll()
 	     .antMatchers("/admin/**").hasRole("ADMIN")
-	     .anyRequest()
-	     .authenticated()
+	     .anyRequest().authenticated()
 	     .and()
 	     .formLogin()
-	     .loginPage("/login")
-	     .permitAll()
+	     .loginPage("/login").permitAll()
 	     .failureUrl("/login?error=true")
-	     .defaultSuccessUrl("/shop")
+	     .defaultSuccessUrl("/shop/{id}")
 	     .usernameParameter("email")
 	     .passwordParameter("password")
 	     .and()
@@ -78,10 +77,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	     .clearAuthentication(true)
 	     .deleteCookies("JSESSIONID")
 	     .and()
-	     .exceptionHandling()
-	     .and()
-	     .csrf()
-	     .disable();
+	     .exceptionHandling();
+	     
 	     
 	   http.headers().frameOptions().disable();  
 	     

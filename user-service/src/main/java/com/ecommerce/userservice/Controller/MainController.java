@@ -9,12 +9,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
 
 
+
 @Controller
 public class MainController {
 
 	String homepg= "http://localhost:8086/shop";
 	RestTemplate restTemplate = new RestTemplate();
 	ResponseEntity<String> response = restTemplate.getForEntity(homepg, String.class);
+	String url ="http://localhost:8008/create";
+	//Product[] cart = restTemplate.getForObject(url, Product[].class);
 	
 	@GetMapping("/login")
 	public String login() {
@@ -40,14 +43,13 @@ public class MainController {
 	    	return responseView;
 	    } 
 	 
-	 String cartpg="http://localhost:8008/cartService";
 	 
 	 @GetMapping("/addToCart/{id}")
 		public ResponseEntity<String> addToCart(@PathVariable Long id) {
 		 ResponseEntity<String> responseView = restTemplate.getForEntity("http://localhost:8008/addToCart/"+id, String.class);
 	    	return responseView;
 		}
-	 
+	 String cartpg="http://localhost:8008/cartService";
 	 @GetMapping("/cartService")
 		public ResponseEntity<String> getCart(Model model)
 		{
@@ -65,7 +67,7 @@ public class MainController {
 		@GetMapping("/checkout")
 		public ResponseEntity<String> goCheckout(Model model)
 		{
-			ResponseEntity<String> responseView = restTemplate.getForEntity(cartpg+"/checkout/", String.class);
+			ResponseEntity<String> responseView = restTemplate.getForEntity("http://localhost:8008/checkout/", String.class);
 	    	return responseView;
 		}
 	 
