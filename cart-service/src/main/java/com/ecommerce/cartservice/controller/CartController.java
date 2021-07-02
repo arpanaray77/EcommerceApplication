@@ -1,16 +1,18 @@
 package com.ecommerce.cartservice.controller;
 
 import java.math.BigDecimal;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
-
 import com.ecommerce.cartservice.Services.ProductService;
 import com.ecommerce.cartservice.global.GlobalData;
+import com.ecommerce.cartservice.model.Product;
 
 
 @Controller
@@ -57,6 +59,13 @@ public class CartController {
 		GlobalData.cart.remove(index);
 		return "redirect:/cartService";
 	}
+	
+	@GetMapping("/createCart")
+	public ResponseEntity<List<Product>> createCart() {
+		List<Product> list = GlobalData.cart;
+		return new ResponseEntity<List<Product>>(list, HttpStatus.OK);
+	}	
+	
 	
 	@GetMapping("/checkout")
 	public String goCheckout(Model model)
