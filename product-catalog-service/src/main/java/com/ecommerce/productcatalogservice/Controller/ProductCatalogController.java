@@ -1,16 +1,15 @@
 package com.ecommerce.productcatalogservice.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
-
 import com.ecommerce.productcatalogservice.Service.CategoryService;
 import com.ecommerce.productcatalogservice.Service.ProductService;
-import com.ecommerce.productcatalogservice.Global.GlobalData;
+
+
 
 @Controller
 public class ProductCatalogController {
@@ -22,6 +21,10 @@ public class ProductCatalogController {
 	private ProductService productService;
 	
 	RestTemplate restTemplate = new RestTemplate();
+	//create or get cart
+	String url ="http://localhost:8008/create";
+	//Product[] cart = restTemplate.getForObject(url, Product[].class);
+
 	
     @GetMapping({"/", "/home"})
     public String displayProducts(Model model)
@@ -32,7 +35,7 @@ public class ProductCatalogController {
     @GetMapping("/shop")
     public String shopCategoriesandProducts(Model model)
     {
-    	model.addAttribute("cartCount",GlobalData.cart.size());
+    	//model.addAttribute("cartCount",cart.length);
     	model.addAttribute("categories",categoryService.getAllCategory());
     	model.addAttribute("products",productService.getAllProduct());
     	return "shop";
@@ -42,7 +45,7 @@ public class ProductCatalogController {
     @GetMapping("/shop/category/{categoryId}")
     public String shopByCategory(Model model,@PathVariable Integer categoryId)
     {
-    	model.addAttribute("cartCount",GlobalData.cart.size());
+    	//model.addAttribute("cartCount",cart.length);
     	model.addAttribute("categories",categoryService.getAllCategory());
     	model.addAttribute("products",productService.getAllProductByCategory_id(categoryId));
     	return "shop";
@@ -51,23 +54,9 @@ public class ProductCatalogController {
     @GetMapping("/shop/viewproduct/{id}")
     public String viewProduct(Model model,@PathVariable Long id)
     {
-    	model.addAttribute("cartCount",GlobalData.cart.size());
+    	//model.addAttribute("cartCount",cart.length);
     	model.addAttribute("product",productService.getProductById(id));
     	return "viewProduct";
     }  
-    
-//    @GetMapping("/addToCart/{id}")
-//	public ResponseEntity<String> addToCart(@PathVariable Long id) {
-//	    ResponseEntity<String> responseCart = restTemplate.getForEntity("http://localhost:8008/addToCart/"+id, String.class);
-//    	return responseCart;
-//	}
-//	
-//	@GetMapping("/cart")
-//	public ResponseEntity<String> getCart()
-//	{
-//		ResponseEntity<String> responseCart = restTemplate.getForEntity("http://localhost:8008/cartService", String.class);
-//    	return responseCart;
-//	}
-
 
 }
