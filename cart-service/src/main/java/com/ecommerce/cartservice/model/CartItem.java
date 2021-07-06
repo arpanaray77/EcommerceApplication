@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+import com.ecommerce.cartservice.controller.DTO.AddtoCartDto;
 import com.ecommerce.cartservice.controller.DTO.CartDto;
 
 @Entity
@@ -23,10 +24,12 @@ public class CartItem {
     private Integer id;
 
     @Column(name = "user_id")
-    private @NotBlank Integer userId;
+    @NotBlank(message = "{userId.not-null}")
+    private Integer userId;
 
     @Column(name = "product_id")
-    private @NotBlank Long productId;
+    @NotBlank(message = "{productId.not-null}")
+    private Long productId;
 
     @Column(name = "created_date")
     private Date createdDate;
@@ -63,6 +66,14 @@ public class CartItem {
         this.product = product;
         this.createdDate = new Date();
     }
+
+
+	public CartItem(AddtoCartDto addtoCartDto,int userId) {
+		this.id=addtoCartDto.getId();
+		this.userId=addtoCartDto.getUserId();
+		this.productId=addtoCartDto.getProductId();
+		this.quantity=addtoCartDto.getQuantity();
+	}
 
 
 	public Integer getId() {
