@@ -49,8 +49,8 @@ public class MainController {
 		 ResponseEntity<String> responseView = restTemplate.getForEntity("http://localhost:8008/addToCart/"+id, String.class);
 	    	return responseView;
 		}
-	 String cartpg="http://localhost:8008/cartService";
-	 @GetMapping("/cartService")
+	 String cartpg="http://localhost:8008/cart";
+	 @GetMapping("/cart")
 		public ResponseEntity<String> getCart(Model model)
 		{
 			ResponseEntity<String> responseView = restTemplate.getForEntity(cartpg, String.class);
