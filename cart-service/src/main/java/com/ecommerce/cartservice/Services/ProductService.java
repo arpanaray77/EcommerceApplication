@@ -12,7 +12,7 @@ public interface ProductService {
 	
 	public List<Product> getAllProduct();
 	public List<Product> getAllProductByCategory_id(Integer categoryId);
-	public Product getProductById(Long id);
+	public Product getProductById(Long productId);
 	public void addProduct(Product product);
     public void deleteProductById(Long productId);
 
