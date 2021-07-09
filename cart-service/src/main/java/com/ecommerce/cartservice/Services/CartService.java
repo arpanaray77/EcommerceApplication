@@ -1,7 +1,6 @@
 package com.ecommerce.cartservice.Services;
 
 import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ecommerce.cartservice.Repository.CartRepository;
@@ -20,7 +19,18 @@ public class CartService {
     } 
 
     public void addToCart(Long productId,int userId,int quantity){
-        CartItem cart = new CartItem(userId,productId,productService.getProductById(productId),quantity);
-        cartRepository.save(cart);
+        CartItem cartItem = new CartItem(userId,productId,productService.getProductById(productId),quantity);
+        cartRepository.save(cartItem);
     }
+    
+    public void removeFromCart(Long productId,int userId){
+        cartRepository.deleteByUserIdAndProductId(userId, productId);;
+    }
+    
+    public void updateCart(Long productId,int userId,int quantity){
+        CartItem cartItem = cartRepository.findByUserIdAndProductId(userId, productId);
+        cartItem.setQuantity(quantity);
+        cartRepository.save(cartItem);
+    }
+    
 }

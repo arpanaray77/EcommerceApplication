@@ -65,29 +65,29 @@
 
                             <h5 class="mb-4">Cart (<span th:text="${cartCount}">2</span> items)</h5>
 
-                            <div class="row mb-4" th:each="product,iter : ${cart}">
+                            <div class="row mb-4" th:each="cartItem.product,cartItem : ${cart}">
                                 <div class="col-md-5 col-lg-3 col-xl-3">
                                     <div class="mb-3 mb-md-0">
-                                        <img class="img-fluid w-100" th:src="@{${'/productImages/' + product.imgName}}"alt="Sample">
+                                        <img class="img-fluid w-100" th:src="@{${'/productImages/' + cartItem.product.imgName}}"alt="Sample">
                                     </div>
                                 </div>
                                 <div class="col-md-7 col-lg-9 col-xl-9">
                                     <div>
                                         <div class="d-flex justify-content-between">
                                             <div>
-                                                <h5 th:text="${product.productName}">Blue denim shirt</h5>
-                                                <p class="mb-3 text-uppercase small">Description: <span th:text="${product.description}"></span></p>
-                                           <p class="mb-2 text-uppercase small">Category: <span th:text="${product.category.categoryName}"></span></p>
+                                                <h5 th:text="${cartItem.product.productName}">Blue denim shirt</h5>
+                                                <p class="mb-3 text-uppercase small">Description: <span th:text="${cartItem.product.description}"></span></p>
+                                           <p class="mb-2 text-uppercase small">Category: <span th:text="${cartItem.product.category.categoryName}"></span></p>
                                             </div>
 
                                         </div>
                                         <div class="mt-5 d-flex justify-content-between align-items-center">
                                             <div>
-                                                <a href="#!" th:href="@{/cartService/removeItem/{index}(index=${iter.index})}"  type="button" class="card-link-secondary small text-uppercase mr-3"><i
+                                                <a href="#!" th:href="@{/cartService/removeItem/{userId}(userId=${cartItem.userId})/{pid}(pid=${cartItem.product.productId})}"  type="button" class="card-link-secondary small text-uppercase mr-3"><i
                                                         class="fas fa-trash-alt mr-1"></i> Remove item </a>
 
                                             </div>
-                                            <p class="mb-0"><span><strong>₹<span th:text="${product.price}"></span></strong></span></p>
+                                            <p class="mb-0"><span><strong>₹<span th:text="${cartItem.product.price}"></span></strong></span></p>
                                         </div>
                                     </div>
                                 </div>
@@ -135,7 +135,7 @@
                                 </li>
                             </ul>
 
-                            <a th:href="@{/checkout}" h class="btn btn-primary btn-block waves-effect waves-light">go to
+                            <a th:href="@{/checkout/{userId}(userId=${cartItem.userId})}" h class="btn btn-primary btn-block waves-effect waves-light">go to
                                 checkout</a>
 
                         </div>
