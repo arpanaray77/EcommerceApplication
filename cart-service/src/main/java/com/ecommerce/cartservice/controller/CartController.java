@@ -32,8 +32,16 @@ public class CartController {
 	ResponseEntity<String> response = restTemplate.getForEntity(homepg, String.class);
 	
 	@GetMapping("/addToCart/{userId}/{productId}")
-	public ResponseEntity<String> addToCart(@PathVariable int userId,@PathVariable Long pid) {
-		cartService.addToCart(pid, userId,1);
+	public ResponseEntity<String> addToCart(@PathVariable int userId,@PathVariable Long productId){
+		CartItem cartItem = cartRepository.findByUserIdAndProductId(userId, productId);
+		if(cartItem!=null)
+		{
+			cartItem.setQuantity(cartItem.getQuantity()+1);
+	        cartRepository.save(cartItem);
+		}
+		else
+		    cartService.addToCart(productId, userId,1);
+		
 		return response;
 	}
 	
@@ -60,11 +68,11 @@ public class CartController {
 		return "cartService";
 	}
 	
-	@GetMapping("/cartService/removeItem/{userId}/{productId}")
+	@GetMapping("/removeItem/{userId}/{productId}")
 	public String removeCartItem(@PathVariable int userId,@PathVariable Long productId)
 	{
-		cartService.removeFromCart(productId, userId);
-		return "redirect:/cartService";
+		cartService.removeFromCart(userId,productId);
+		return "cartService";
 	}
 	
 	@GetMapping("/checkout/{userId}")

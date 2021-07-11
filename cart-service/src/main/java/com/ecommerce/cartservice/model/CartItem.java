@@ -8,8 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-
 import com.sun.istack.NotNull;
 
 @Entity
@@ -21,11 +19,11 @@ public class CartItem {
     private Integer id;
 
     @Column(name = "user_id")
-    @NotBlank(message = "{userId.not-null}")
+    @NotNull
     private Integer userId;
 
     @Column(name = "product_id")
-    @NotBlank(message = "{productId.not-null}")
+    @NotNull
     private Long productId;
     
     @ManyToOne
@@ -43,8 +41,7 @@ public class CartItem {
     public CartItem() {
     }
        
-	public CartItem(@NotBlank(message = "{userId.not-null}") Integer userId,
-			@NotBlank(message = "{productId.not-null}") Long productId, Product product,Integer quantity) {
+	public CartItem( Integer userId,Long productId, Product product,Integer quantity) {
 		super();
 		this.userId = userId;
 		this.productId = productId;

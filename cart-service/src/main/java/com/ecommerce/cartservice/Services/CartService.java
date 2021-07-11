@@ -23,14 +23,8 @@ public class CartService {
         cartRepository.save(cartItem);
     }
     
-    public void removeFromCart(Long productId,int userId){
-        cartRepository.deleteByUserIdAndProductId(userId, productId);;
-    }
-    
-    public void updateCart(Long productId,int userId,int quantity){
-        CartItem cartItem = cartRepository.findByUserIdAndProductId(userId, productId);
-        cartItem.setQuantity(quantity);
-        cartRepository.save(cartItem);
+    public void removeFromCart(int userId,Long productId){
+        cartRepository.deleteByUserIdAndProductId(userId, productId);
     }
     
 }
