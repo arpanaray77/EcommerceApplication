@@ -3,11 +3,9 @@ package com.ecommerce.userservice.SecurityConfig;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
@@ -15,7 +13,6 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
-
 import com.ecommerce.userservice.Model.Roles;
 import com.ecommerce.userservice.Model.User;
 import com.ecommerce.userservice.Repository.RoleRepository;
@@ -47,9 +44,8 @@ public class GoogleOAuth2SuccessHandler implements AuthenticationSuccessHandler 
 		    	User user=new User();
 		    	user.setUsername(token.getPrincipal().getAttributes().get("given_name").toString());
 		    	user.setEmail(email);
-		    	//user.setPassword(email);
 		    	List<Roles> roles=new ArrayList<>();
-		    	roles.add(roleRepository.findById(2).get());
+		    	roles.add(roleRepository.findById(1).get());
 		    	user.setRoles(roles);
 		    	userRepository.save(user);
 		    }

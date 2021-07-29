@@ -30,11 +30,11 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	private RoleRepository roleRepository;
-
+	
 	@Override
 	public User save(UserRegistrationDto registrationDto) {
 		User user = new User(registrationDto.getUsername(), registrationDto.getEmail(),
-				passwordEncoder.encode(registrationDto.getPassword()), Arrays.asList(roleRepository.findById(2).get()));
+				passwordEncoder.encode(registrationDto.getPassword()), Arrays.asList(roleRepository.findById(1).get()));
 		
 		return userRepository.save(user);
 	}

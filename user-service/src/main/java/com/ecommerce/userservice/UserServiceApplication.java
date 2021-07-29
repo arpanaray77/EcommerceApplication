@@ -12,6 +12,5 @@ public class UserServiceApplication {
 //		    String password [] = {"admin"};
 //		    for(int i = 0; i < password.length; i++)
 //		        System.out.println(passwordEncoder.encode(password[i]));
-
-		    }
+  }
 }

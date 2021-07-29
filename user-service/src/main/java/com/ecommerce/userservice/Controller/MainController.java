@@ -1,27 +1,65 @@
 package com.ecommerce.userservice.Controller;
 
 
+import java.security.Principal;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
 
-
+import com.ecommerce.userservice.Model.User;
+import com.ecommerce.userservice.Repository.UserRepository;
 
 @Controller
 public class MainController {
-
+	
+	@Autowired
+	private UserRepository userRepo;
+	
 	String homepg= "http://localhost:8086/shop";
 	RestTemplate restTemplate = new RestTemplate();
 	ResponseEntity<String> response = restTemplate.getForEntity(homepg, String.class);
-	String url ="http://localhost:8008/create";
-	//Product[] cart = restTemplate.getForObject(url, Product[].class);
+	
 	
 	@GetMapping("/login")
 	public String login() {
 		return "login";
+	}
+	
+	@GetMapping("/getId")
+    public String viewUserAccountForm(
+            @AuthenticationPrincipal UserDetails userDetails,
+            Principal principal,Authentication authentication,
+            Model model) {
+	 if(userDetails!=null)
+	 {
+        String userEmail = userDetails.getUsername();
+        User user = userRepo.findUserByEmail(userEmail);
+        model.addAttribute("userId", user.getId());
+	 }
+	 
+	 else if (principal != null) {
+	        OAuth2AuthenticationToken token = (OAuth2AuthenticationToken) authentication;
+		    String email=token.getPrincipal().getAttributes().get("email").toString();
+		    User user = userRepo.findUserByEmail(email);
+	        model.addAttribute("userId", user.getId());
+	 }
+        return "shop";
+    }
+
+
+	@GetMapping("/admin")
+	public ResponseEntity<String> adminHome() {
+		String homepg= "http://localhost:8086/admin";
+		ResponseEntity<String> response = restTemplate.getForEntity(homepg, String.class);
+		return response;
 	}
 
 	@GetMapping({"/","/shop"})

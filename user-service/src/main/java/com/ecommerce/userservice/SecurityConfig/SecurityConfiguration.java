@@ -67,6 +67,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	     .passwordParameter("password")
 	     .and()
 	     .oauth2Login()
+	     
 	     .loginPage("/login")
 	     .successHandler(googleOAuth2SuccessHandler)
 	     .and()
@@ -89,6 +90,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	 {
 		 web.ignoring().antMatchers("/resources/**","/static/**","/img/**","/productImages/**","/css/**","/js/**");
 	 }
-	 
 	 
 }
